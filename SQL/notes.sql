@@ -72,3 +72,6 @@
 
 -- create table stud2(sid varchar(3),sname varchar(20),scontact varchar(10),primary key(sid,sname));
 
+
+-- 25/11/2024
+
