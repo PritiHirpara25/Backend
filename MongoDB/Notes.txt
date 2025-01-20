@@ -1,0 +1,152 @@
+24/12/2024
+
+To run MongoDB : mongosh
+
+To Show databases : show dbs
+
+To create new database : use Database_Name
+                         use employee
+
+To show collections in database : show collections
+
+To create new collection in database : db.createCollection("name")
+                                       db.createCollection("emp")
+                                       {ok:1}
+
+To insert document in database : db.collection_name.insertOne({})
+                                 db.emp.insertOne({empno : 111 , empname : "Raj" , empsal : 100000})
+
+To show document : db.collection_name.find()
+                   db.emp.find()
+
+[{
+    _id: ObjectId('676aa6ea7b6157dde24eeb86'),
+    empno: 111,
+    empname: 'Raj',
+    empsal: 10000
+  }]              
+
+26/12/2024
+ 
+ db.emp.insertMany([
+    {name:"Any" , age:"21" , status : "busy" , city : "Surat"},
+    {name:"Tony" , age:"25" , status : "busy" , contact : 9898989898},
+    {name:"Bobby" , age:"28" , status : "online" , address : "NirmalNagar"},
+    {name:"Sonny" , age:"28" , status : "away" },
+    {name:"Cher" , age:"20" , status : "online"  }
+    ])
+
+db.emp.find({}).skip(2)          --It Skips first two documents.
+db.emp.find({}).sort("name")     --It sorting a name field in alphabetical ascending oreder.
+db.emp.find({}).sort({name : -1})   --It sorting a name field in alphabetical descending oreder.
+db.emp.find({}).count()          --It counts documents number.
+
+30/12/2024
+
+Comparision Operator
+
+$eq , $ne , $gt , $gte , $lt , $lte , $in , $nin
+
+db.books.find({ no_of_reviews: {$eq: 3}})
+db.books.find({ no_of_reviews: 3 })
+db.books.find({ no_of_reviews: {$ne: 3}})
+db.books.find({ no_of_reviews: {$gt: 3}})
+db.books.find({ no_of_reviews: {$lte: 3}})
+db.books.find({ no_of_reviews: {$in: 3}})
+db.books.find({ no_of_reviews: {$nin: 3}})
+
+db.books.find({"author.profile.exp" : {$gt : 4}})
+db.books.find({"author.profile.exp" : {$lte : 4}})
+
+db.books.find({"author.profile.courses" : 2 })
+db.books.find({"author.profile.courses" :{$eq : 2 }})
+
+db.books.find({"author.callname" :{$eq : "Dan"} })
+db.books.find({"author.callname" :"Dan"})
+
+db.books.find({tags : {$eq : "database"}})
+db.books.find({tags : "database"})
+
+db.books.find({tags : ["language" , "freeware" , "programming"]})
+db.books.find({tags : {$eq : ["language" , "freeware" , "programming"]}})
+
+$in
+
+db.books.find({no_of_reviews : {$in : [1,4,5]}})
+db.books.find({no_of_reviews : {$nin : [1,4,5]}})
+
+
+31/12/2024
+
+
+Logical Operator
+
+db.books.find({$or : [{no_of_reviews: {$lt:3}} , {downloadable : true}]})
+db.books.find({$or : [{no_of_reviews: {$lt:3}} , {downloadable : true} , {"author.profile.books" : {$gte : 2}}]})
+
+db.books.find({$and : [{no_of_reviews: {$lt:3}} , {downloadable : true}]})
+db.books.find({$and : [{no_of_reviews: {$lt:3}} , {downloadable : true} , {"author.profile.books" : {$gte : 2}}]})
+
+db.books.find({$nor : [{no_of_reviews: {$lt:3}} , {downloadable : true}]})
+db.books.find({$nor : [{no_of_reviews: {$lt:3}} , {downloadable : true} , {"author.profile.books" : {$gte : 2}}]})
+
+db.books.find({$or : [{no_of_reviews: {$lt:3}} , {downloadable : true}]}).count()
+
+
+01/01/2025 (C Lan Reavision)
+
+02/01/2025
+
+Delete:
+db.books.deleteOne({no_of_reviews : 2} , {$set : {isbn : 1101}})
+
+Update:
+db.books.updateOne({no_of_reviews : 2} , {$set : {"author.profile.books" : 8}})
+db.books.updateOne({no_of_reviews : 2} , {$set : {"price" : 1200}})
+
+*Element Query Operator*
+1.$exists:
+db.books.find({price :{$exists : true}})
+db.books.find({price :{$exists : false}})
+2.$type
+*Array Query Operator*
+1.$all Operator
+
+db.books.find({$and : [{tags:"database"} , {tags:"sql"}]})
+db.books.find({tags : {$all : ["database" , "sql"]}})
+
+2.$elemMatch Operator
+
+db.createCollection("score")
+db.score.insertOne({ _id: 1, results: [ 82, 85, 88 ] })
+db.score.insertOne({ _id: 2, results: [ 75, 88, 89 ]  })
+
+db.score.find(
+   { results: { $elemMatch: { $gte: 80, $lt: 85 } } }
+)
+
+db.score.find({$and : [{results : {$gte:80}} ,{results : {$lt:85}}]})
+
+
+3.$size Operator
+
+
+03/01/2025
+
+db.books.find({},{title:1,no_of_reviews:1})
+
+db.books.find({no_of_reviews:{$gte:3}} , {title:1 , no_of_reviews:1 , isbn:1 , _id:0})
+
+
+
+
+
+
+
+
+
+
+
+
+
+

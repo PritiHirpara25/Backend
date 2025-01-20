@@ -5,8 +5,7 @@
 -- for display all databases
 -- show databases;
 
-
--- createing database
+-- creating database
 -- create database <db-name>;
 -- create database test;
 

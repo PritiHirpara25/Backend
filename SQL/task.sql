@@ -386,8 +386,6 @@ where so.order_no = sod.order_no
 group by sod.order_no
 having so.order_date like '%06%';
 
-
-
 2. Exercises on Joins and Correlation:
 
 --> a.Find out the product, which have been sold to 'Ivan Bayross'.
@@ -408,7 +406,6 @@ where cm.name = 'Ivan Bayross';
 | Pull Overs   | Ivan Bayross |
 | Cotton Jeans | Ivan Bayross |
 +--------------+--------------+
-
 
 /*  Theta style */
 
@@ -646,6 +643,9 @@ and cm.client_no in ('C00001','C00002');
 3. Exercise on Sub-queries:
 
 -- a. Find the ProductNo and description of non-moving products i.e. products not being sold.
+
+
+
 -- b. List the customer Name, Address1, Address2, City and PinCode for the client who has placed order no 019001'.
 -- c. List the client names that have placed orders before the month of May 02.
 -- d. List if the product Lycra Top' has been ordered by any client and print the Client no, Name to whom it was sold.
