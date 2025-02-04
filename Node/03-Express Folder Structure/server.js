@@ -10,7 +10,6 @@ app.get("/", function (request, response) {
         msg: "Welcome to Expresss Server"
     });
 });
-
 app.listen(port, hostName, function () {
     console.log("Express Server is started at http://".concat(hostName, ":").concat(port));
 });
